@@ -58,14 +58,13 @@ class FileExplorerActivity : ComponentActivity() {
             return
         }
         this.currentPath.text = dir.absolutePath
-        if(dir.listFiles() != null){
-            val childFiles = dir.listFiles()!!.filter { file ->
-                file.isDirectory or (file.path.takeLast(4) == ".pdf")
-            }?.sortedWith(FileComparator)
 
-            val adapter = FileListAdapter(childFiles)
-            fileList.adapter = adapter
-        }
+        val childFiles = dir.listFiles()?.filter { file ->
+            file.isDirectory or (file.path.takeLast(4) == ".pdf")
+        }?.sortedWith(FileComparator) ?: listOf()
+
+        val adapter = FileListAdapter(childFiles)
+        fileList.adapter = adapter
     }
 }
 
