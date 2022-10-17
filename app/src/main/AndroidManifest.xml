@@ -19,7 +19,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Pdfviewer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +31,7 @@
                 android:value="" />
         </activity>
         <activity android:name=".fileexplorer.FileExplorerActivity" />
+        <activity android:name=".PdfActivity" />
     </application>
 
 </manifest>

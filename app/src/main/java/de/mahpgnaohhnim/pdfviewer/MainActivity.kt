@@ -15,20 +15,34 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+        startApp()
+    }
 
-        runOnTimeout({
-            if (Environment.isExternalStorageManager()) {
-                val intent = Intent(this, FileExplorerActivity::class.java)
-                overridePendingTransition(0, 0)
-                intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-                intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
-                startActivity(intent)
-            } else {
-                val uri: Uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
-                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri)
-                startActivity(intent)
-            }
-        }, 500)
+    override fun onResume() {
+        super.onResume()
+        startApp()
+    }
+
+    fun startApp(){
+        if (Environment.isExternalStorageManager()) {
+            goToFileExplorer()
+        } else {
+            goToPermissionSettings()
+        }
+    }
+
+    private fun goToFileExplorer() {
+            val intent = Intent(this, FileExplorerActivity::class.java)
+            overridePendingTransition(0, 0)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+            startActivity(intent)
+    }
+
+    private fun goToPermissionSettings() {
+        val uri: Uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
+        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri)
+        startActivity(intent)
     }
 
     inline fun runOnTimeout(crossinline block: () -> Unit, timeoutMillis: Long) {

@@ -10,7 +10,7 @@ import de.mahpgnaohhnim.pdfviewer.R
 import java.io.File
 
 
-class FileListAdapter(private val files: List<File>) :
+class FileListAdapter(private val files: List<File>, private val listener: (File) -> Unit) :
     RecyclerView.Adapter<FileListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +27,10 @@ class FileListAdapter(private val files: List<File>) :
             holder.imageIcon.setImageResource(R.drawable.folder)
         } else {
             holder.imageIcon.setImageResource(R.drawable.viewpdf)
+        }
+
+        holder.itemView.setOnClickListener{v ->
+                listener(files[position])
         }
     }
 
