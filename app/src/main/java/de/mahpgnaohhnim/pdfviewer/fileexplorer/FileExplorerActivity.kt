@@ -42,7 +42,7 @@ class FileExplorerActivity : ComponentActivity() {
 
         })
 
-        selectDiretory("$rootPath")
+        selectDiretory("$rootPath"+"/Download")
     }
 
     fun onItemClick(list: List<File>, position: Int) {
@@ -58,12 +58,14 @@ class FileExplorerActivity : ComponentActivity() {
             return
         }
         this.currentPath.text = dir.absolutePath
-        val childFiles = dir.listFiles().filter { file ->
-            file.isDirectory or (file.path.takeLast(4) == ".pdf")
-        }.sortedWith(FileComparator)
+        if(dir.listFiles() != null){
+            val childFiles = dir.listFiles()!!.filter { file ->
+                file.isDirectory or (file.path.takeLast(4) == ".pdf")
+            }?.sortedWith(FileComparator)
 
-        val adapter = FileListAdapter(childFiles)
-        fileList.adapter = adapter
+            val adapter = FileListAdapter(childFiles)
+            fileList.adapter = adapter
+        }
     }
 }
 

@@ -1,9 +1,9 @@
 package de.mahpgnaohhnim.pdfviewer.fileexplorer
 
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.mahpgnaohhnim.pdfviewer.R
@@ -21,12 +21,12 @@ class FileListAdapter(private val files: List<File>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val file = files[position]
-        val filepath = file.path
+        val filepath = file.name
         holder.textView.text = filepath
         if (file.isDirectory) {
-            holder.textView.setTypeface(holder.textView.typeface, Typeface.BOLD)
+            holder.imageIcon.setImageResource(R.drawable.folder)
         } else {
-            holder.textView.setTypeface(holder.textView.typeface, Typeface.NORMAL)
+            holder.imageIcon.setImageResource(R.drawable.viewpdf)
         }
     }
 
@@ -36,5 +36,6 @@ class FileListAdapter(private val files: List<File>) :
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val textView: TextView = itemView.findViewById(R.id.fs_item_filename)
+        val imageIcon: ImageView = itemView.findViewById(R.id.icon_file)
     }
 }
