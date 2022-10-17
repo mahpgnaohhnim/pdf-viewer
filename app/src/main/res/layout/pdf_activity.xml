@@ -11,4 +11,39 @@
         android:visibility="visible"
         tools:visibility="visible" />
 
+
+    <LinearLayout
+        android:id="@+id/pdfPasswordContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bitte Passwort eingeben:"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/pdfPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/passwordSubmitBtn"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingHorizontal="30dp"
+            android:text="Bestätigen" />
+    </LinearLayout>
+
 </RelativeLayout>
