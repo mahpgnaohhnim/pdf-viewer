@@ -3,6 +3,7 @@ package de.mahpgnaohhnim.pdfviewer.fileexplorer
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +29,10 @@ class FileExplorerActivity : ComponentActivity() {
         fileListLayoutManager = LinearLayoutManager(this)
         fileList.layoutManager = fileListLayoutManager
         selectDiretory(rootPath)
+    }
+
+    override fun onBackPressed() {
+        onItemClick(File(".."))
     }
 
     fun onItemClick(file: File) {
