@@ -22,7 +22,6 @@
             android:theme="@style/Theme.Pdfviewer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -31,7 +30,17 @@
                 android:value="" />
         </activity>
         <activity android:name=".fileexplorer.FileExplorerActivity" />
-        <activity android:name=".PdfActivity" />
+        <activity android:name=".PdfActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/pdf" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
