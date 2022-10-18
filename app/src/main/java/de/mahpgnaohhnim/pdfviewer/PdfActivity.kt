@@ -4,19 +4,19 @@ import android.content.Intent
 import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
-import android.widget.Button
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.activity.ComponentActivity
 import com.github.barteksc.pdfviewer.PDFView
 import java.io.File
 
+
 class PdfActivity : ComponentActivity() {
     private lateinit var pdfView: PDFView
 
     private lateinit var passwordContainer: LinearLayout
     private lateinit var passwordField: EditText
-    private lateinit var submitBtn: Button
     private var pdfPath: String? = null
 
     companion object {
@@ -30,8 +30,14 @@ class PdfActivity : ComponentActivity() {
 
         passwordContainer = findViewById(R.id.pdfPasswordContainer)
         passwordField = findViewById(R.id.pdfPassword)
-        submitBtn = findViewById(R.id.passwordSubmitBtn)
-        submitBtn.setOnClickListener { v -> handleSubmitPsswd() }
+
+        passwordField.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                this.handleSubmitPsswd()
+            }
+            false
+        }
+
         val intentAction = intent?.action
         when {
             intentAction == Intent.ACTION_VIEW -> {
@@ -60,7 +66,6 @@ class PdfActivity : ComponentActivity() {
             this.pdfPath = tempFilePath
             this.initPdf(tmpFile)
         }
-
     }
 
     private fun initPdf(pdfFile: File?) {
